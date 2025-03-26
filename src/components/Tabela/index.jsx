@@ -2,10 +2,14 @@ const Tabela = () => {
     return (
         <table>
             <thead>
-                <th>Cabeçalho</th>
+                <th>Data</th>
+                <th>Período</th>
+                <th>Pressão Arterial</th>
             </thead>
             <tr>
-                <td>Linha</td>
+                <td>25/03</td>
+                <td>Manhã</td>
+                <td>120/80</td>
             </tr>
         </table>
     )
