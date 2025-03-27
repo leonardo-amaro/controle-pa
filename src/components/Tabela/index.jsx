@@ -10,11 +10,15 @@ const Tabela = ({ dados }) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>25/03</td>
-          <td>Manhã</td>
-          <td>120/80</td>
-        </tr>
+        {dados.map(
+          (dadoAtual) => (
+            <tr>
+              <td>{dadoAtual.data}</td>
+              <td>{dadoAtual.periodo}</td>
+              <td>{dadoAtual.pressao}</td>
+            </tr>
+          )
+        )}
       </tbody>
     </table>
   )
