@@ -1,11 +1,22 @@
 import { useState } from 'react'
 
-const Formulario = () => {
+const Formulario = ({ salvaDados }) => {
 
   const [data, setData] = useState('yyyy-MM-dd')
   const [periodo, setPeriodo] = useState('')
   const [pSistole, setPSistole] = useState(0)
   const [pDiastole, setPDiastole] = useState(0)
+
+  function aoRegistrar(e) {
+    e.preventDefault()
+    const dadosFormulario = {
+      data,
+      periodo,
+      pressao: `${pSistole} / ${pDiastole}`
+    }
+    salvaDados(dadosFormulario)
+    return console.log('Dados salvos!')
+  }
 
   return (
     <form>
@@ -42,7 +53,9 @@ const Formulario = () => {
         value={pDiastole} onChange={(evento) => setPDiastole(evento.target.value)}
       />
       
-      <button>Registrar</button>
+      <button onClick={(evento) => aoRegistrar(evento)}>
+        Registrar
+      </button>
     </form>
   )
 }

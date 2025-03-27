@@ -1,5 +1,6 @@
-const Tabela = () => {
+const Tabela = ({ dados }) => {
   return (
+    dados.length > 0 &&
     <table>
       <thead>
         <tr>
