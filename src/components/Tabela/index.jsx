@@ -5,8 +5,13 @@ const TableEstilizada = styled.table`
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.6);
   margin: 24px 0;
   width: 100%;
-  thead {
-    background-color: gray;
+  text-align: center;
+  thead tr td {
+    padding: 8px 16px;
+    border-bottom: 1px solid #000;
+  }
+  tbody tr td {
+    padding: 8px 16px;
   }
 `
 
