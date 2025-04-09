@@ -12,6 +12,7 @@ const TableEstilizada = styled.table`
   }
   tbody tr td {
     padding: 8px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
   }
 `
 
