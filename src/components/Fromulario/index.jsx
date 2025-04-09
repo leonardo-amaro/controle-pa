@@ -25,9 +25,7 @@ const InputEstilizado = styled.input`
   padding: 16px 4px;
 `
 function formatarData(dataString) {
-  let dataArray = dataString.split('-').reverse()
-  let dataFormatada = dataArray.join('/')
-  return dataFormatada
+  return dataString.split('-').reverse().join('/')
 }
 
 const Formulario = ({ salvaDados }) => {
