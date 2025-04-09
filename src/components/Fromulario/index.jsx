@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const FormEstlizado = styled.form`
   padding: 8px;
@@ -27,6 +27,10 @@ const InputEstilizado = styled.input`
 function formatarData(dataString) {
   return dataString.split('-').reverse().join('/')
 }
+function formatarNumero(numero, tipo) {
+  if (tipo === 'mes') numero++
+  return numero / 10 < 1 ? `0${numero}` : numero
+}
 
 const Formulario = ({ salvaDados }) => {
 
@@ -34,6 +38,12 @@ const Formulario = ({ salvaDados }) => {
   const [periodo, setPeriodo] = useState('')
   const [pSistole, setPSistole] = useState(0)
   const [pDiastole, setPDiastole] = useState(0)
+
+  useEffect(() => {
+    const data = new Date()
+    const string = `${data.getFullYear()}-${formatarNumero(data.getMonth(), 'mes')}-${formatarNumero(data.getDate(), 'dia')}`
+    setData(string)
+  }, [])
 
   function aoRegistrar(e) {
     e.preventDefault()
@@ -52,15 +62,21 @@ const Formulario = ({ salvaDados }) => {
         <label htmlFor="data">
           Data:
         </label>
-        <InputEstilizado type="date" name="data" id="data" 
-          value={data} onChange={(evento) => setData(evento.target.value)}
+        <InputEstilizado 
+          type="date" 
+          name="data" 
+          id="data" 
+          value={data} 
+          onChange={(evento) => setData(evento.target.value)}
         />
       </InputContainer>
       <InputContainer>
         <label htmlFor="periodo-dia">
           Período:
         </label>
-        <select name="periodo-dia" id="periodo-dia" 
+        <select 
+          name="periodo-dia" 
+          id="periodo-dia" 
           onChange={(evento) => setPeriodo(evento.target.value)}
         >
           <option value="">Selecione</option>
@@ -73,7 +89,13 @@ const Formulario = ({ salvaDados }) => {
         <label htmlFor="p-sistole">
           Pressão sistólica:
         </label>
-        <InputEstilizado type="number" name="p-sistole" id="p-sistole" min={0} max={200} step={5}
+        <InputEstilizado 
+          type="number" 
+          name="p-sistole" 
+          id="p-sistole" 
+          min={0} 
+          max={200} 
+          step={10}
           value={pSistole} onChange={(evento) => setPSistole(evento.target.value)} 
         />
       </InputContainer>
@@ -81,7 +103,13 @@ const Formulario = ({ salvaDados }) => {
         <label htmlFor="p-diastole">
           Pressão diastólica:
         </label>
-        <InputEstilizado type="number" name="p-diastole" id="p-diastole" min={0} max={200} step={5} 
+        <InputEstilizado 
+          type="number" 
+          name="p-diastole" 
+          id="p-diastole" 
+          min={0} 
+          max={200} 
+          step={10} 
           value={pDiastole} onChange={(evento) => setPDiastole(evento.target.value)}
         />
       </InputContainer>
