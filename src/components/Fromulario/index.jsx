@@ -47,13 +47,19 @@ const Formulario = ({ salvaDados }) => {
 
   function aoRegistrar(e) {
     e.preventDefault()
-    const dadosFormulario = {
-      data: formatarData(data),
-      periodo: periodo.toUpperCase(),
-      pressao: `${pSistole} / ${pDiastole}`
+    if (periodo === '') {
+      return alert('Por favor, selecione um período do dia.')
+    } else if (pSistole < 10 || pDiastole < 10) {
+      return alert('Pressão arterial com dados inválidos.')
+    } else {
+      const dadosFormulario = {
+        data: formatarData(data),
+        periodo: periodo.toUpperCase(),
+        pressao: `${pSistole} / ${pDiastole}`
+      }
+      salvaDados(dadosFormulario)
+      return console.log('Dados salvos!')
     }
-    salvaDados(dadosFormulario)
-    return console.log('Dados salvos!')
   }
 
   return (
