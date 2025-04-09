@@ -24,6 +24,11 @@ const InputEstilizado = styled.input`
   width: 50%;
   padding: 16px 4px;
 `
+function formatarData(dataString) {
+  let dataArray = dataString.split('-').reverse()
+  let dataFormatada = dataArray.join('/')
+  return dataFormatada
+}
 
 const Formulario = ({ salvaDados }) => {
 
@@ -35,8 +40,8 @@ const Formulario = ({ salvaDados }) => {
   function aoRegistrar(e) {
     e.preventDefault()
     const dadosFormulario = {
-      data,
-      periodo,
+      data: formatarData(data),
+      periodo: periodo.toUpperCase(),
       pressao: `${pSistole} / ${pDiastole}`
     }
     salvaDados(dadosFormulario)
@@ -50,7 +55,7 @@ const Formulario = ({ salvaDados }) => {
           Data:
         </label>
         <InputEstilizado type="date" name="data" id="data" 
-          value={data} onChange={(evento) => setData(evento.target.value)} 
+          value={data} onChange={(evento) => setData(evento.target.value)}
         />
       </InputContainer>
       <InputContainer>
