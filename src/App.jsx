@@ -7,6 +7,9 @@ import { useState } from 'react'
 const AppContainer = styled.div`
   width: 480px;
   margin: 0 auto;
+  h1 {
+    text-align: center;
+  }
 `
 
 const App = () => {
