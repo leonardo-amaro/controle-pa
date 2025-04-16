@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import formataData from "../../utils/formataData"
 
 const TableEstilizada = styled.table`
   border-collapse: collapse;
@@ -31,9 +32,9 @@ const Tabela = ({ dados }) => {
         {dados.map(
           (dadoAtual) => (
             <tr key={dadoAtual.id}>
-              <td>{dadoAtual.data}</td>
+              <td>{formataData(dadoAtual.data)}</td>
               <td>{dadoAtual.periodo}</td>
-              <td>{dadoAtual.sistole}</td>
+              <td>{`${dadoAtual.sistole} / ${dadoAtual.diastole}`}</td>
             </tr>
           )
         )}
