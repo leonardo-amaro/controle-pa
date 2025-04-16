@@ -30,10 +30,10 @@ const Tabela = ({ dados }) => {
       <tbody>
         {dados.map(
           (dadoAtual) => (
-            <tr>
+            <tr key={dadoAtual.id}>
               <td>{dadoAtual.data}</td>
               <td>{dadoAtual.periodo}</td>
-              <td>{dadoAtual.pressao}</td>
+              <td>{dadoAtual.sistole}</td>
             </tr>
           )
         )}

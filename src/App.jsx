@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import EstilosGlobais from './components/EstilosGlobais'
 import Formulario from './components/Fromulario'
 import Tabela from './components/Tabela'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const AppContainer = styled.div`
   width: 480px;
@@ -15,6 +15,12 @@ const AppContainer = styled.div`
 const App = () => {
 
   const [dados, setDados] = useState([])
+  
+  useEffect(() => {
+    fetch("http://localhost:8000/")
+      .then((resposta) => resposta.json())
+      .then((resultado) => setDados(resultado))
+  }, [])
 
   return (
     <>
