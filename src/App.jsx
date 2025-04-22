@@ -27,7 +27,7 @@ const App = () => {
       <EstilosGlobais />
       <AppContainer>
         <h1>Controle de P.A.</h1>
-        <Formulario salvaDados={(objeto) => setDados([...dados, objeto])} />
+        <Formulario />
         <Tabela dados={dados} />
       </AppContainer>
     </>

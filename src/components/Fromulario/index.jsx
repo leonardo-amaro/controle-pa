@@ -1,5 +1,7 @@
+import axios from 'axios'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
+import formataNumero from '../../utils/formataNumero'
 
 const FormEstlizado = styled.form`
   padding: 8px;
@@ -24,15 +26,8 @@ const InputEstilizado = styled.input`
   width: 50%;
   padding: 16px 4px;
 `
-function formatarData(dataString) {
-  return dataString.split('-').reverse().join('/')
-}
-function formatarNumero(numero, tipo) {
-  if (tipo === 'mes') numero++
-  return numero / 10 < 1 ? `0${numero}` : numero
-}
 
-const Formulario = ({ salvaDados }) => {
+const Formulario = () => {
 
   const [data, setData] = useState('yyyy-MM-dd')
   const [periodo, setPeriodo] = useState('')
@@ -41,7 +36,7 @@ const Formulario = ({ salvaDados }) => {
 
   useEffect(() => {
     const data = new Date()
-    const string = `${data.getFullYear()}-${formatarNumero(data.getMonth(), 'mes')}-${formatarNumero(data.getDate(), 'dia')}`
+    const string = `${data.getFullYear()}-${formataNumero(data.getMonth(), 'mes')}-${formataNumero(data.getDate(), 'dia')}`
     setData(string)
   }, [])
 
@@ -53,11 +48,14 @@ const Formulario = ({ salvaDados }) => {
       return alert('Pressão arterial com dados inválidos.')
     } else {
       const dadosFormulario = {
-        data: formatarData(data),
-        periodo: periodo.toUpperCase(),
-        pressao: `${pSistole} / ${pDiastole}`
+        data: data,
+        periodo: periodo.toLowerCase(),
+        sistole: pSistole,
+        diastole: pDiastole
       }
-      salvaDados(dadosFormulario)
+      axios.post('http://localhost:8000', dadosFormulario)
+        .then((resposta) => console.log(resposta))
+        .catch((erro) => console.log(erro))
       return console.log('Dados salvos!')
     }
   }
