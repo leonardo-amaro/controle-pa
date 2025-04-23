@@ -42,22 +42,18 @@ const Formulario = () => {
 
   function aoRegistrar(e) {
     e.preventDefault()
-    if (periodo === '') {
-      return alert('Por favor, selecione um período do dia.')
-    } else if (pSistole < 10 || pDiastole < 10) {
-      return alert('Pressão arterial com dados inválidos.')
-    } else {
-      const dadosFormulario = {
-        data: data,
-        periodo: periodo.toLowerCase(),
-        sistole: pSistole,
-        diastole: pDiastole
-      }
-      axios.post('http://localhost:8000', dadosFormulario)
-        .then((resposta) => console.log(resposta))
-        .catch((erro) => console.log(erro))
-      return console.log('Dados salvos!')
+    if (periodo === '') return alert('Por favor, selecione um período do dia.')
+    if (pSistole < 10 || pDiastole < 10) return alert('Pressão arterial com dados inválidos.')
+    const dadosFormulario = {
+      data: data,
+      periodo: periodo,
+      sistole: pSistole,
+      diastole: pDiastole
     }
+    axios.post('http://localhost:8000', dadosFormulario)
+      .then((resposta) => console.log(resposta))
+      .catch((erro) => console.log(erro))
+    return console.log('Dados salvos!')
   }
 
   return (
