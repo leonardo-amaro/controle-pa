@@ -1,3 +1,4 @@
+import axios from 'axios'
 import styled from 'styled-components'
 import EstilosGlobais from './components/EstilosGlobais'
 import Formulario from './components/Fromulario'
@@ -11,15 +12,31 @@ const AppContainer = styled.div`
     text-align: center;
   }
 `
+const fetchDados = async () => {
+  try {
+    const resposta = await axios.get('http://localhost:8000')
+    return resposta.data
+  } catch (erro) {
+    console.error('Erro ao buscar dados: ' + erro)
+    return null
+  }
+}
+// const postDados = (objeto) => {
+//   axios.post('http://localhost:8000', objeto)
+//     .then((resposta) => console.log(resposta))
+//     .catch((erro) => console.log(erro))
+// }
 
 const App = () => {
 
   const [dados, setDados] = useState([])
+  const carregaDados = async () => {
+    const resultado = await fetchDados()
+    setDados(resultado)
+  }
   
   useEffect(() => {
-    fetch("http://localhost:8000/")
-      .then((resposta) => resposta.json())
-      .then((resultado) => setDados(resultado))
+    carregaDados()
   }, [])
 
   return (
