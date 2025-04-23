@@ -21,11 +21,11 @@ const fetchDados = async () => {
     return null
   }
 }
-// const postDados = (objeto) => {
-//   axios.post('http://localhost:8000', objeto)
-//     .then((resposta) => console.log(resposta))
-//     .catch((erro) => console.log(erro))
-// }
+const postDados = (objeto) => {
+  axios.post('http://localhost:8000', objeto)
+    .then((resposta) => console.log(resposta))
+    .catch((erro) => console.log(erro))
+}
 
 const App = () => {
 
@@ -33,6 +33,9 @@ const App = () => {
   const carregaDados = async () => {
     const resultado = await fetchDados()
     setDados(resultado)
+  }
+  const enviaDados = (dadosObjeto) => {
+    postDados(dadosObjeto)
   }
   
   useEffect(() => {
@@ -44,7 +47,7 @@ const App = () => {
       <EstilosGlobais />
       <AppContainer>
         <h1>Controle de P.A.</h1>
-        <Formulario />
+        <Formulario aoSubmeter={enviaDados} />
         <Tabela dados={dados} />
       </AppContainer>
     </>

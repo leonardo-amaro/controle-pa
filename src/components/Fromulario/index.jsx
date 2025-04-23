@@ -1,4 +1,3 @@
-import axios from 'axios'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import formataNumero from '../../utils/formataNumero'
@@ -27,7 +26,7 @@ const InputEstilizado = styled.input`
   padding: 16px 4px;
 `
 
-const Formulario = () => {
+const Formulario = ({ aoSubmeter }) => {
 
   const [data, setData] = useState('yyyy-MM-dd')
   const [periodo, setPeriodo] = useState('')
@@ -50,10 +49,7 @@ const Formulario = () => {
       sistole: pSistole,
       diastole: pDiastole
     }
-    axios.post('http://localhost:8000', dadosFormulario)
-      .then((resposta) => console.log(resposta))
-      .catch((erro) => console.log(erro))
-    return console.log('Dados salvos!')
+    aoSubmeter(dadosFormulario)
   }
 
   return (
